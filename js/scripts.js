@@ -10,8 +10,8 @@ function draw() {
   //q.getContext('2d').fillStyle='#'+Math.floor(Math.random()*16777215).toString(16);
   q.getContext('2d').fillStyle='#428bca';
   letters.map(function(y_pos, index){
-	text = (Math.random() > 0.7)? text = String.fromCharCode(1e2+Math.random()*33) : text = word[(y_pos / (height / (word.length - 1))).toFixed(0)];
-	q.getContext('2d').font = 'bold ' + fontsize + 'px Terminal';
+  text = (Math.random() > 0.7)? text = String.fromCharCode(1e2+Math.random()*33) : text = word[(y_pos / (height / (word.length - 1))).toFixed(0)];
+  q.getContext('2d').font = 'bold ' + fontsize + 'px Terminal';
     q.getContext('2d').fillText(text, index * fontsize, y_pos);
     letters[index] = (y_pos > (height/3) + Math.random() * 1e4) ? 0 : y_pos + fontsize;
   });
@@ -25,7 +25,7 @@ setInterval(draw, 30);
 
 window.onresize = function(){
     width = q.width = window.innerWidth;
-    height = q.height = window.innerHeight; 
+    height = q.height = window.innerHeight;
 }
 
 // Closes the sidebar menu
@@ -56,3 +56,31 @@ window.onresize = function(){
             }
         });
     });
+// Closes the sidebar menu
+$("#menu-close").click(function(e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("active");
+});
+
+// Opens the sidebar menu
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("active");
+});
+
+// Scrolls to the selected menu item on the page
+$(function() {
+    $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+                $('html,body').animate({
+                    scrollTop: target.offset().top
+                }, 1000);
+                return false;
+            }
+        }
+    });
+});
