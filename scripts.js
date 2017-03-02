@@ -1,32 +1,45 @@
-$(function() {
+
     // Custom rain
-    var word = "cybercorey".split('');
-    var fontsize = 15;
+    var letters = "cybercorey".split('');
+    var fontSize = 15;
     var width = q.width = window.innerWidth;
     var height = q.height = window.innerHeight;
-    var letters = Array(parseInt((width/20).toFixed(0) + 1)).join(1).split('');
+    ctx = q.getContext('2d');
+    
+    var columns = q.width / fontSize;
+    var chars = []; // init the chars 
+    for(var x = 0; x < columns; x++){
+      if(Math.random() > 0.900)
+        chars[x] = 1
+      else 
+        chars[x] = q.height
+        
+    }  
+    
+
 
     function draw() {
-      q.getContext('2d').fillStyle='rgba(0,0,0,.06)';
-      q.getContext('2d').fillRect(0,0,width,height);
-      //q.getContext('2d').fillStyle='#'+Math.floor(Math.random()*16777215).toString(16);
-      q.getContext('2d').fillStyle='#428bca';
-      letters.map(function(y_pos, index){
-      text = (Math.random() > 0.7)? text = String.fromCharCode(1e2+Math.random()*33) : text = word[(y_pos / (height / (word.length - 1))).toFixed(0)];
-      q.getContext('2d').font = 'bold ' + fontsize + 'px Terminal';
-        q.getContext('2d').fillText(text, index * fontsize, y_pos);
-        letters[index] = (y_pos > (height/3) + Math.random() * 1e4) ? 0 : y_pos + fontsize;
-      });
+      ctx.fillStyle='rgba(0,0,0, 0.06)';
+      ctx.fillRect(0,0,width,height);
+      // ctx.fillStyle='#'+Math.floor(Math.random()*16777215).toString(16);
+      ctx.fillStyle='#428bca';
+      
+// loop over the chars 
+      for(var i = 0; i < chars.length; i++){
+        var char = chars[i];
+        var letter = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(letter, i*fontSize, char*fontSize);
+
+        if (char*fontSize > q.height && Math.random() > 0.975) {
+          chars[i] = 0;
+        }
+        chars[i]++;
+      }
     };
 
-    for(var i=0; i < 200; i++){
-        draw();
-    }
-
-    setInterval(draw, 30);
+    setInterval(draw, 50);
 
     window.onresize = function(){
         width = q.width = window.innerWidth;
         height = q.height = window.innerHeight;
     }
-});
