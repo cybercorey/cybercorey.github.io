@@ -43,3 +43,10 @@
         width = q.width = window.innerWidth;
         height = q.height = window.innerHeight;
     }
+
+
+    window.onload = function(){
+      date = new Date()
+      document.getElementById('CopyrightDate').innerHTML = date.getFullYear()
+      
+    }
