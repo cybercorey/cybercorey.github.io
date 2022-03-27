@@ -1,7 +1,7 @@
 const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
 const columns = [];
-
+let letters = "cybercorey".split('');
 const TEXT_HEIGHT = 20;
 const LAYERS = 2;
 let WIDTH = canvas.width = innerWidth;
@@ -18,7 +18,11 @@ addEventListener("resize", () => {
 const generateCharacter = () => {
     const CHARACTERS = Array.from(Array(94)).map((char, index) => String.fromCharCode(33 + index));
     const randomIndex = Math.floor(Math.random() * CHARACTERS.length);
-    return CHARACTERS[randomIndex];
+    let returnData = CHARACTERS[randomIndex]
+    if (Math.random() > 0.400) {
+        returnData = letters[Math.floor(Math.random() * letters.length)];
+    }
+    return returnData;
 };
 
 const init = () => {
@@ -43,10 +47,10 @@ const init = () => {
 const getColor = (index, array, x) => {
     const size = array.length;
     const COLORS = [
-        "#428bca",
-        "#428bca",
-        "#428bca",
-        "#428bca",
+        "#070e14",
+        "#0d1c28",
+        "#1a3851",
+        "#2e618d",
         "#ffff",
     ];
     const last = index === size - 1;
@@ -81,7 +85,7 @@ const matrixIteration = () => {
         data.letters.forEach((letter, index, array) => {
             const isWhite = index === array.length - 1;
             ctx.fillStyle = getColor(index, array, x);
-            ctx.shadowColor = "#2aa144";
+            ctx.shadowColor = "#142a3d";
             ctx.shadowOffsetX = 0;
             ctx.shadowOffsetY = 0;
             ctx.shadowBlur = 10;
