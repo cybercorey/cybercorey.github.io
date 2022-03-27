@@ -121,7 +121,18 @@ const matrixIteration = () => {
 
 init();
 setInterval(matrixIteration, 50);
-setInterval(() => {
-    moveCanvas();
-    toggleFont();
-}, 12000);
+// setInterval(() => {
+//     moveCanvas();
+//     toggleFont();
+// }, 12000);
+
+window.onload = function () {
+    date = new Date()
+    document.getElementById('CopyrightDate').innerHTML = date.getFullYear()
+}
+
+window.onresize = function () {
+    totalColumns = Math.floor(WIDTH / TEXT_HEIGHT) + 1;
+    WIDTH = canvas.width = innerWidth;
+    HEIGHT = canvas.height = innerHeight;
+}
