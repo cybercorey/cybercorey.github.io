@@ -15,6 +15,12 @@ addEventListener("resize", () => {
     HEIGHT = canvas.height = innerHeight;
 });
 
+const text = new URL(location.href).searchParams.get("text");
+
+if (text) {
+    document.querySelector(".manz div").textContent = text;
+}
+
 let font = "monospace";
 
 const toggleFont = () => {
@@ -48,7 +54,6 @@ const init = () => {
             speed
         });
     }
-    music.play();
 
     // Reset
     ctx.fillStyle = "black";
@@ -58,11 +63,11 @@ const init = () => {
 const getColor = (index, array, x) => {
     const size = array.length;
     const COLORS = [
-        "#0f01",
-        "#0f02",
-        "#0f05",
-        "#0f0f",
-        "#ffff",
+        "#428bca",
+        "#428bca",
+        "#428bca",
+        "#428bca",
+        "#428bca",
     ];
     const last = index === size - 1;
     const first = index === 0;
@@ -79,7 +84,9 @@ const getColor = (index, array, x) => {
                     ? COLORS[2]
                     : COLORS[3];
 
-    const alpha = x % 4 ? "f" : x % 3 ? "6" : "2";
+    const alpha = x % 4
+        ? "f"
+        : x % 3 ? "6" : "2";
 
     return color.split("").slice(0, -1).join("") + alpha;
 };
