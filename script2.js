@@ -15,26 +15,6 @@ addEventListener("resize", () => {
     HEIGHT = canvas.height = innerHeight;
 });
 
-const text = new URL(location.href).searchParams.get("text");
-
-if (text) {
-    document.querySelector(".manz div").textContent = text;
-}
-
-let font = "monospace";
-
-const toggleFont = () => {
-    font = font === "monospace" ? "Comic Sans MS" : "monospace";
-    document.querySelector(".manz div").classList.toggle("comic");
-};
-
-const moveCanvas = () => {
-    document.body.classList.add("moved");
-    document.body.classList.add("color");
-    setTimeout(() => document.body.classList.remove("moved"), 300);
-    setTimeout(() => document.body.classList.remove("color"), 600);
-};
-
 const generateCharacter = () => {
     const CHARACTERS = Array.from(Array(94)).map((char, index) => String.fromCharCode(33 + index));
     const randomIndex = Math.floor(Math.random() * CHARACTERS.length);
@@ -67,7 +47,7 @@ const getColor = (index, array, x) => {
         "#428bca",
         "#428bca",
         "#428bca",
-        "#428bca",
+        "#ffff",
     ];
     const last = index === size - 1;
     const first = index === 0;
@@ -95,7 +75,7 @@ const matrixIteration = () => {
     ctx.fillStyle = "#000";
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-    ctx.font = `18pt ${font}`;
+    ctx.font = `18pt monospace`;
 
     columns.forEach((data, x) => {
         data.letters.forEach((letter, index, array) => {
@@ -121,10 +101,6 @@ const matrixIteration = () => {
 
 init();
 setInterval(matrixIteration, 50);
-// setInterval(() => {
-//     moveCanvas();
-//     toggleFont();
-// }, 12000);
 
 window.onload = function () {
     date = new Date()
